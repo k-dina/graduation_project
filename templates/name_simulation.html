@@ -1,0 +1,31 @@
+{% extends "name_simulation_base.html" %}
+
+{% block extra_content_name_simulation %}
+<form action="{% url 'name_simulation_view' %}" method="post" novalidate>
+    {% csrf_token %}
+    <div class="mb-5">
+        <input type="text" class="form-control form-control-lg mb-10" maxlength="100" name="name"/>
+        <input type="hidden" name="simulation_id" value="{{simulation_id}}">
+    </div>
+    <button class="btn btn-primary btn-lg btn-block"
+            type="submit">Save to my simulations
+    </button>
+
+    <hr class="my-4">
+
+    {% if errors %}
+    <div class="error-messages">
+        <h5>errors:</h5>
+        <ul>
+            {% for field_errors in errors.values %}
+            {% for error in field_errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+
+</form>
+{% endblock %}

@@ -1,0 +1,70 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+<body>
+<section class="vh-100" style="background-color: #508bfc;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12">
+                <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                    <div class="card-body p-5">
+
+                        <h3 class="mb-5 text-center">You are about to start your simulation!</h3>
+                        <form action="/newsimulation" method="post" novalidate>
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-10">
+                                    <h5>step 1: select resource availability</h5>
+                                    <p>this will determine the fertility of the land: how many resources can grow on it
+                                        and how often they will be renewed (on a relative scale from 1 to 10)</p>
+                                </div>
+                                <div class="col-2">
+                                    <input type="number" name="field_fertility" class="form-control form-control-lg" min="1" max="10"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-8">
+                                    <h5>step 2: choose hereditary trait strength</h5>
+                                    <p>blobs have two hereditary traits: vitality and charisma. Vitality increases the likelihood of blob survival and charisma determines blob's strength as a leader. Input values will be set as an average for initial population (1 to 100)</p>
+                                </div>
+                                <div class="col-4">
+                                    <input type="number" name="vitality" class="form-control form-control-lg"  min="1" max="100" placeholder="vitality"/>
+                                    <input type="number" name="charisma" class="form-control form-control-lg mt-3" min="1" max="100" placeholder="charisma"/>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12 text-center mt-5">
+                                        <input type="submit" class="btn btn-primary btn-lg btn-block" value="Start">
+                                    </div>
+                                </div>
+                            </div>
+
+                            {% if errors %}
+                                <p class="error text-danger mt-5" >{{ errors }}</p>
+                            {% endif %}
+
+
+
+                        </form>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+</body>
+</html>
